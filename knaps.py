@@ -43,6 +43,15 @@ def main():
         if upload_file is not None:
             df = pd.read_csv(upload_file)
             st.dataframe(df)
+
+            # Display the number of data points for each label
+            label_counts = df['Label'].value_counts()
+            st.write('Jumlah data pada setiap label:')
+            st.bar_chart(label_counts)
+            
+            # Display the counts in a table
+            st.write("Jumlah data per label:")
+            st.write(label_counts)
             
     elif selected == 'Klasifikasi Naive Bayes':
         st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
