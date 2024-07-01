@@ -109,4 +109,5 @@ def main():
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
 
-if __name__ == "__main
+if __name__ == "__main__":
+    main()
