@@ -20,7 +20,7 @@ stop_words = set(stopwords.words('indonesian'))
 def naive_bayes_classification():
     st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
     
-    file_path = '/mnt/data/Salinan antaranews.csv'  # update with your file path
+    file_path = 'antaranews.csv'  # update with your file path
     
     # Check if the file exists
     if not os.path.exists(file_path):
