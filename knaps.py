@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
 
 def split_data(data):
@@ -60,7 +61,8 @@ def main():
                 X_train_tfidf = vectorizer.transform(X_train)
                 X_test_tfidf = vectorizer.transform(X_test)
 
-                # Train the model
+                # Train a new MultinomialNB model
+                nb = MultinomialNB()
                 nb.fit(X_train_tfidf, y_train)
                 
                 # Predict the labels for the test set
