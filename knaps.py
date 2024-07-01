@@ -10,10 +10,8 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from sklearn.decomposition import LatentDirichletAllocation
-from gensim import corpora, models
-from gensim.utils import simple_preprocess
 
+# Ensure NLTK data is downloaded
 nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = set(stopwords.words('indonesian'))
@@ -22,8 +20,8 @@ stop_words = set(stopwords.words('indonesian'))
 def naive_bayes_classification():
     st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
     
-    file_path = 'path/to/your/csvfile.csv'  # update with your file path
-    data = pd.read_csv(antaranews.csv)
+    file_path = 'antaranews.csv'  # update with your file path
+    data = pd.read_csv(file_path)
     
     X = data['Artikel']
     y = data['Label']
@@ -53,45 +51,13 @@ def naive_bayes_classification():
     joblib.dump(nb, 'naive_bayes_model.pkl')
     joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
 
-# Function for Topic Modelling
-def preprocess_text(text):
-    if not isinstance(text, str):
-        text = str(text)
-    text = re.sub(r'\d+', '', text)
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'\W', ' ', text)
-    text = text.lower()
-    tokens = word_tokenize(text)
-    tokens = [word for word in tokens if word not in stop_words]
-    return ' '.join(tokens)
-
-def topic_modelling():
-    st.markdown('<h1 style="text-align: center;"> Topic Modelling </h1>', unsafe_allow_html=True)
-    
-    file_path = 'antaranews.csv'  # update with your file path
-    data = pd.read_csv(file_path)
-    
-    data['processed_artikel'] = data['Artikel'].apply(preprocess_text)
-    
-    vectorizer = CountVectorizer(max_df=0.95, min_df=2, stop_words=stop_words)
-    X = vectorizer.fit_transform(data['processed_artikel'])
-    
-    lda = LatentDirichletAllocation(n_components=5, random_state=42)
-    lda.fit(X)
-    
-    st.write('Topics:')
-    terms = vectorizer.get_feature_names()
-    for idx, topic in enumerate(lda.components_):
-        st.write(f"Topic {idx}:")
-        st.write([terms[i] for i in topic.argsort()[:-11:-1]])
-
 # Main function to create the Streamlit app
 def main():
     with st.sidebar:
         selected = option_menu(
             "Main Menu",
-            ["Home", "Klasifikasi Naive Bayes", "Topic Modelling", "Uji Coba"],
-            icons=['house', 'table', 'boxes', 'check2-circle'],
+            ["Home", "Klasifikasi Naive Bayes", "Uji Coba"],
+            icons=['house', 'table', 'check2-circle'],
             menu_icon="cast",
             default_index=1,
             orientation='vertical')
@@ -101,9 +67,6 @@ def main():
             
     elif selected == 'Klasifikasi Naive Bayes':
         naive_bayes_classification()
-            
-    elif selected == 'Topic Modelling':
-        topic_modelling()
             
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
