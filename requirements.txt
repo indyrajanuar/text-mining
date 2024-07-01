@@ -6,4 +6,3 @@ streamlit-option-menu
 seaborn
 matplotlib
 nltk
-gensim
