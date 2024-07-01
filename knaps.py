@@ -21,13 +21,15 @@ def main():
             orientation='vertical')
         
         
-        if selected == 'Home':
+    if selected == 'Home':
+        st.markdown('<h1 style="text-align: center;"> Website Klasifikasi Hipertensi </h1>', unsafe_allow_html=True)
+        st.markdown('<h3 style="text-align: left;"> Hipertensi </h1>', unsafe_allow_html=True)
             
-        elif selected == 'Klasifikasi Naive Bayes':
+    elif selected == 'Klasifikasi Naive Bayes':
             
-        elif selected == 'Topic Modelling':
+    elif selected == 'Topic Modelling':
             
-        elif selected == 'Uji Coba':
+    elif selected == 'Uji Coba':
  
 if __name__ == "__main__":
     main()
