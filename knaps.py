@@ -31,7 +31,7 @@ def main():
         if st.button('Classify'):
             if upload_file:
                 # Transform the new article using the loaded vectorizer
-                new_data_tfidf = vectorizer.transform([new_article])
+                new_data_tfidf = vectorizer.transform([upload_file])
                 # Predict the label using the loaded model
                 prediction = nb.predict(new_data_tfidf)
                 # Display the prediction
