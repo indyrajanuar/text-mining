@@ -75,16 +75,6 @@ def main():
                 recall = recall_score(y_test, y_pred, average='weighted')
                 f1 = f1_score(y_test, y_pred, average='weighted')
 
-                # Display metrics
-                st.write(f'Accuracy: {accuracy * 100:.2f}%')
-                st.write(f'Precision: {precision * 100:.2f}%')
-                st.write(f'Recall: {recall * 100:.2f}%')
-                st.write(f'F1 Score: {f1 * 100:.2f}%')
-
-                # Display classification report
-                st.write('Classification Report:')
-                st.text(classification_report(y_test, y_pred))
-
                 # Generate confusion matrix
                 cm = confusion_matrix(y_test, y_pred)
                 # Plot confusion matrix
@@ -97,17 +87,38 @@ def main():
                 # Clear the current plot to avoid displaying it multiple times
                 plt.clf()
 
+                # Display the metrics
+                html_code = f"""
+                <br>
+                <table style="margin: auto;">
+                    <tr>
+                        <td style="text-align: center; border: none;"><h5>Accuracy</h5></td>
+                        <td style="text-align: center; border: none;"><h5>Precision</h5></td>
+                        <td style="text-align: center; border: none;"><h5>Recall</h5></td>
+                        <td style="text-align: center; border: none;"><h5>F1- Score</h5></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; border: none;">{accuracy * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{precision * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{recall * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{f1 * 100:.2f}%</td>
+                    </tr>
+                </table>
+                """
+
+                st.markdown(html_code, unsafe_allow_html=True)
+
                 # Optionally, classify new articles from the uploaded file
-                if 'Artikel' in df.columns:
-                    articles = df['Artikel'].fillna('')  # Fill missing values with empty strings
-                    articles_tfidf = vectorizer.transform(articles)
-                    predictions = nb.predict(articles_tfidf)
-                    df['Predicted Label'] = predictions
-                    st.write(df)
-            else:
-                st.write("The uploaded CSV file does not contain the required 'Artikel' or 'Label' columns.")
-        else:
-            st.write("Please upload a CSV file to classify articles.")
+        #         if 'Artikel' in df.columns:
+        #             articles = df['Artikel'].fillna('')  # Fill missing values with empty strings
+        #             articles_tfidf = vectorizer.transform(articles)
+        #             predictions = nb.predict(articles_tfidf)
+        #             df['Predicted Label'] = predictions
+        #             st.write(df)
+        #     else:
+        #         st.write("The uploaded CSV file does not contain the required 'Artikel' or 'Label' columns.")
+        # else:
+        #     st.write("Please upload a CSV file to classify articles.")
 
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
