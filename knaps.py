@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import joblib
+import os
 import re
 import nltk
 from nltk.corpus import stopwords
@@ -21,6 +22,12 @@ def naive_bayes_classification():
     st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
     
     file_path = 'antaranews.csv'  # update with your file path
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        st.error(f"The file '{file_path}' does not exist.")
+        return
+    
     data = pd.read_csv(file_path)
     
     X = data['Artikel']
