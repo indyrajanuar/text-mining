@@ -75,14 +75,14 @@ def main():
                 f1 = f1_score(y_test, y_pred, average='weighted')
 
                 # Display metrics
-                st.write(f'Accuracy: {accuracy * 100:.2f}%')
-                st.write(f'Precision: {precision * 100:.2f}%')
-                st.write(f'Recall: {recall * 100:.2f}%')
-                st.write(f'F1 Score: {f1 * 100:.2f}%')
+                # st.write(f'Accuracy: {accuracy * 100:.2f}%')
+                # st.write(f'Precision: {precision * 100:.2f}%')
+                # st.write(f'Recall: {recall * 100:.2f}%')
+                # st.write(f'F1 Score: {f1 * 100:.2f}%')
 
                 # Display classification report
-                st.write('Classification Report:')
-                st.text(classification_report(y_test, y_pred))
+                # st.write('Classification Report:')
+                # st.text(classification_report(y_test, y_pred))
 
                 # Generate confusion matrix
                 cm = confusion_matrix(y_test, y_pred)
@@ -95,6 +95,24 @@ def main():
                 st.pyplot(plt.gcf())  # Pass the current figure to st.pyplot()
                 # Clear the current plot to avoid displaying it multiple times
                 plt.clf()
+
+                # html_code = f"""
+                <br>
+                <table style="margin: auto;">
+                    <tr>
+                        <td style="text-align: center; border: none;"><h5>Accuracy</h5></td>
+                        <td style="text-align: center; border: none;"><h5>Precision</h5></td>
+                        <td style="text-align: center; border: none;"><h5>Recall</h5></td>
+                        <td style="text-align: center; border: none;"><h5>F1- Score</h5></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; border: none;">{accuracy * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{precision * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{recall * 100:.2f}%</td>
+                        <td style="text-align: center; border: none;">{f1 * 100:.2f}%</td>
+                    </tr>
+                </table>
+                """
 
                 # Optionally, classify new articles from the uploaded file
                 if 'Artikel' in df.columns:
