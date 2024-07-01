@@ -4,6 +4,7 @@ import joblib
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
@@ -74,6 +75,16 @@ def main():
                 recall = recall_score(y_test, y_pred, average='weighted')
                 f1 = f1_score(y_test, y_pred, average='weighted')
 
+                # Display metrics
+                st.write(f'Accuracy: {accuracy * 100:.2f}%')
+                st.write(f'Precision: {precision * 100:.2f}%')
+                st.write(f'Recall: {recall * 100:.2f}%')
+                st.write(f'F1 Score: {f1 * 100:.2f}%')
+
+                # Display classification report
+                st.write('Classification Report:')
+                st.text(classification_report(y_test, y_pred))
+
                 # Generate confusion matrix
                 cm = confusion_matrix(y_test, y_pred)
                 # Plot confusion matrix
@@ -85,28 +96,6 @@ def main():
                 st.pyplot(plt.gcf())  # Pass the current figure to st.pyplot()
                 # Clear the current plot to avoid displaying it multiple times
                 plt.clf()
-
-                # Generate classification report
-                with np.errstate(divide='ignore', invalid='ignore'):  # Suppress division by zero warning
-                    report = classification_report(y_test, y_pred, zero_division=0)
-
-                # html_code = f"""
-                <br>
-                <table style="margin: auto;">
-                    <tr>
-                        <td style="text-align: center; border: none;"><h5>Accuracy</h5></td>
-                        <td style="text-align: center; border: none;"><h5>Precision</h5></td>
-                        <td style="text-align: center; border: none;"><h5>Recall</h5></td>
-                        <td style="text-align: center; border: none;"><h5>F1- Score</h5></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: center; border: none;">{accuracy * 100:.2f}%</td>
-                        <td style="text-align: center; border: none;">{precision * 100:.2f}%</td>
-                        <td style="text-align: center; border: none;">{recall * 100:.2f}%</td>
-                        <td style="text-align: center; border: none;">{f1 * 100:.2f}%</td>
-                    </tr>
-                </table>
-                """
 
                 # Optionally, classify new articles from the uploaded file
                 if 'Artikel' in df.columns:
