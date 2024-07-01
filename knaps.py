@@ -60,6 +60,8 @@ def main():
         - **Bagus untuk Teks**: Terbukti efektif dalam tugas klasifikasi teks seperti spam filtering dan analisis sentimen.
         
     """)
+
+        st.markdown('<h3 style="text-align: left;"> View Data </h1>', unsafe_allow_html=True)
         
         if upload_file is not None:
             df = pd.read_csv(upload_file)
