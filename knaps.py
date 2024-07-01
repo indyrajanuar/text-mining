@@ -7,7 +7,6 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import joblib
 import os
-import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -21,14 +20,25 @@ stop_words = set(stopwords.words('indonesian'))
 def naive_bayes_classification():
     st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
     
-    file_path = 'antaranews.csv'  # update with your file path
+    file_path = '/mnt/data/Salinan antaranews.csv'  # update with your file path
     
     # Check if the file exists
     if not os.path.exists(file_path):
         st.error(f"The file '{file_path}' does not exist.")
         return
     
-    data = pd.read_csv(file_path)
+    try:
+        data = pd.read_csv(file_path)
+    except pd.errors.EmptyDataError:
+        st.error("The file is empty or not formatted correctly.")
+        return
+    except Exception as e:
+        st.error(f"An error occurred while reading the file: {e}")
+        return
+    
+    if data.empty or 'Artikel' not in data.columns or 'Label' not in data.columns:
+        st.error("The file does not contain the required columns: 'Artikel' and 'Label'.")
+        return
     
     X = data['Artikel']
     y = data['Label']
