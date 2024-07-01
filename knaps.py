@@ -111,6 +111,21 @@ def main():
 
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
+        st.write("Enter an article for classification:")
+
+        # Load the model and vectorizer
+        nb, vectorizer = load_model()
+
+        # Input area for new articles
+        new_article = st.text_area("New Article")
+
+        if st.button("Classify"):
+            if new_article:
+                new_article_tfidf = vectorizer.transform([new_article])
+                prediction = nb.predict(new_article_tfidf)
+                st.write(f"Predicted Label: {prediction[0]}")
+            else:
+                st.write("Please enter an article to classify.")
 
 if __name__ == "__main__":
     main()
