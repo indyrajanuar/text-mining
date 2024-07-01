@@ -39,7 +39,28 @@ def main():
         upload_file = st.sidebar.file_uploader("Masukkan file csv disini", key=1)
     
     if selected == 'Home':
-        st.markdown('<h1 style="text-align: center;"> Home </h1>', unsafe_allow_html=True)
+        st.markdown("""
+        ## Klasifikasi Berita Menggunakan Naive Bayes
+
+        **Klasifikasi Berita** adalah proses otomatis untuk mengelompokkan berita ke dalam kategori atau label tertentu berdasarkan konten berita tersebut. Misalnya, sebuah berita bisa diklasifikasikan sebagai "Olahraga", "Politik", "Ekonomi", atau "Teknologi" berdasarkan isinya.
+
+        **Naive Bayes** adalah algoritma pembelajaran mesin yang digunakan untuk tugas klasifikasi. Algoritma ini berdasarkan teorema Bayes dengan asumsi independensi yang sangat sederhana yaitu setiap fitur (kata-kata dalam teks) dianggap independen satu sama lain, walaupun dalam kenyataannya fitur-fitur tersebut bisa saling terkait.
+
+        ### Bagaimana Naive Bayes Bekerja?
+        1. **Pengumpulan Data**: Kumpulkan data berita yang sudah dikategorikan dalam berbagai label (misalnya, "Olahraga", "Politik").
+        2. **Preprocessing Data**: Lakukan pembersihan data seperti menghapus kata-kata yang tidak penting, mengubah teks menjadi bentuk yang konsisten, dan mengisi nilai yang hilang.
+        3. **Ekstraksi Fitur**: Gunakan teknik seperti TF-IDF (Term Frequency-Inverse Document Frequency) untuk mengubah teks berita menjadi fitur numerik yang bisa diproses oleh model.
+        4. **Pelatihan Model**: Latih model Naive Bayes menggunakan data pelatihan. Model ini akan mempelajari probabilitas kata-kata muncul di setiap kategori berita.
+        5. **Klasifikasi Berita**: Gunakan model yang sudah dilatih untuk mengklasifikasikan berita baru berdasarkan probabilitas yang dipelajari.
+        6. **Evaluasi Model**: Ukur kinerja model menggunakan metrik seperti akurasi, presisi, recall, dan f1-score untuk memastikan bahwa model dapat mengklasifikasikan berita dengan baik.
+
+        ### Kelebihan Naive Bayes
+        - **Sederhana dan Efisien**: Mudah diimplementasikan dan memerlukan waktu komputasi yang relatif rendah.
+        - **Cepat dalam Pelatihan dan Prediksi**: Dapat menangani dataset besar dengan cepat.
+        - **Bagus untuk Teks**: Terbukti efektif dalam tugas klasifikasi teks seperti spam filtering dan analisis sentimen.
+        
+    """)
+        
         if upload_file is not None:
             df = pd.read_csv(upload_file)
             st.dataframe(df)
