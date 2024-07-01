@@ -23,7 +23,7 @@ def naive_bayes_classification():
     st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
     
     file_path = 'path/to/your/csvfile.csv'  # update with your file path
-    data = pd.read_csv(file_path)
+    data = pd.read_csv(antaranews.csv)
     
     X = data['Artikel']
     y = data['Label']
