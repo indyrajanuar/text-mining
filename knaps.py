@@ -68,7 +68,7 @@ def preprocess_text(text):
 def topic_modelling():
     st.markdown('<h1 style="text-align: center;"> Topic Modelling </h1>', unsafe_allow_html=True)
     
-    file_path = 'path/to/your/csvfile.csv'  # update with your file path
+    file_path = 'antaranews.csv'  # update with your file path
     data = pd.read_csv(file_path)
     
     data['processed_artikel'] = data['Artikel'].apply(preprocess_text)
