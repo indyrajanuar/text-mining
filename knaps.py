@@ -19,14 +19,15 @@ def main():
             menu_icon="cast",
             default_index=1,
             orientation='vertical')
-    
-    if selected == 'Home':
-    
-    elif selected == 'Klasifikasi Naive Bayes':
-            
-    elif selected == 'Topic Modelling':
         
-    elif selected == 'Uji Coba':
+        
+        if selected == 'Home':
+            
+        elif selected == 'Klasifikasi Naive Bayes':
+            
+        elif selected == 'Topic Modelling':
+            
+        elif selected == 'Uji Coba':
  
 if __name__ == "__main__":
     main()
