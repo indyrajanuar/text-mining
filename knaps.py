@@ -23,13 +23,15 @@ def main():
         
     if selected == 'Home':
         st.markdown('<h1 style="text-align: center;"> Website Klasifikasi Hipertensi </h1>', unsafe_allow_html=True)
-        st.markdown('<h3 style="text-align: left;"> Hipertensi </h1>', unsafe_allow_html=True)
             
     elif selected == 'Klasifikasi Naive Bayes':
+        st.markdown('<h1 style="text-align: center;"> Website Klasifikasi Hipertensi </h1>', unsafe_allow_html=True)
             
     elif selected == 'Topic Modelling':
+        st.markdown('<h1 style="text-align: center;"> Website Klasifikasi Hipertensi </h1>', unsafe_allow_html=True)
             
     elif selected == 'Uji Coba':
+        st.markdown('<h1 style="text-align: center;"> Website Klasifikasi Hipertensi </h1>', unsafe_allow_html=True)
  
 if __name__ == "__main__":
     main()
