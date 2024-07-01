@@ -46,6 +46,7 @@ def main():
             
     elif selected == 'Klasifikasi Naive Bayes':
         st.markdown('<h1 style="text-align: center;"> Klasifikasi Naive Bayes </h1>', unsafe_allow_html=True)
+        st.write("Berikut merupakan hasil klasifikasi yang di dapat dari pemodelan Naive Bayes")
 
         if upload_file is not None:
             df = pd.read_csv(upload_file)
@@ -107,18 +108,6 @@ def main():
                 """
 
                 st.markdown(html_code, unsafe_allow_html=True)
-
-                # Optionally, classify new articles from the uploaded file
-        #         if 'Artikel' in df.columns:
-        #             articles = df['Artikel'].fillna('')  # Fill missing values with empty strings
-        #             articles_tfidf = vectorizer.transform(articles)
-        #             predictions = nb.predict(articles_tfidf)
-        #             df['Predicted Label'] = predictions
-        #             st.write(df)
-        #     else:
-        #         st.write("The uploaded CSV file does not contain the required 'Artikel' or 'Label' columns.")
-        # else:
-        #     st.write("Please upload a CSV file to classify articles.")
 
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
