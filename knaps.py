@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import joblib
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def main():
@@ -25,19 +26,25 @@ def main():
         nb = joblib.load('naive_bayes_model.pkl')
         vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
-        # Text input for new article
-        # new_article = st.text_area('Enter the article text here:')
+        if upload_file is not None:
+            # Read the CSV file
+            df = pd.read_csv(upload_file)
 
-        if st.button('Classify'):
-            if upload_file:
-                # Transform the new article using the loaded vectorizer
-                new_data_tfidf = vectorizer.transform([upload_file])
-                # Predict the label using the loaded model
-                prediction = nb.predict(new_data_tfidf)
-                # Display the prediction
-                st.write('Predicted Label:', prediction[0])
+            # Check if the CSV file contains the expected column
+            if 'Artikel' in df.columns:
+                articles = df['Artikel'].fillna('')  # Fill missing values with empty strings
+                # Transform the articles using the loaded vectorizer
+                articles_tfidf = vectorizer.transform(articles)
+                # Predict the labels using the loaded model
+                predictions = nb.predict(articles_tfidf)
+                # Add predictions to the dataframe
+                df['Predicted Label'] = predictions
+                # Display the dataframe with predictions
+                st.write(df)
             else:
-                st.write('Please enter an article to classify.')
+                st.write("The uploaded CSV file does not contain the required 'Artikel' column.")
+        else:
+            st.write("Please upload a CSV file to classify articles.")
 
     elif selected == 'Uji Coba':
         st.markdown('<h1 style="text-align: center;"> Uji Coba </h1>', unsafe_allow_html=True)
