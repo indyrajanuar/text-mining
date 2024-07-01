@@ -74,16 +74,6 @@ def main():
                 recall = recall_score(y_test, y_pred, average='weighted')
                 f1 = f1_score(y_test, y_pred, average='weighted')
 
-                # Display metrics
-                # st.write(f'Accuracy: {accuracy * 100:.2f}%')
-                # st.write(f'Precision: {precision * 100:.2f}%')
-                # st.write(f'Recall: {recall * 100:.2f}%')
-                # st.write(f'F1 Score: {f1 * 100:.2f}%')
-
-                # Display classification report
-                # st.write('Classification Report:')
-                # st.text(classification_report(y_test, y_pred))
-
                 # Generate confusion matrix
                 cm = confusion_matrix(y_test, y_pred)
                 # Plot confusion matrix
@@ -95,6 +85,10 @@ def main():
                 st.pyplot(plt.gcf())  # Pass the current figure to st.pyplot()
                 # Clear the current plot to avoid displaying it multiple times
                 plt.clf()
+
+                # Generate classification report
+                with np.errstate(divide='ignore', invalid='ignore'):  # Suppress division by zero warning
+                    report = classification_report(y_test, y_pred, zero_division=0)
 
                 # html_code = f"""
                 <br>
